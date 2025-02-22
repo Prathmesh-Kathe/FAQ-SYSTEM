@@ -1,0 +1,45 @@
+{
+  "name": "faq-api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "mocha test --exit",
+    "lint": "eslint . --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+
+    "@ckeditor/ckeditor5-build-classic": "^44.1.0",
+    "@vitalets/google-translate-api": "^9.2.1",
+
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "google-translate-api-x": "^10.7.2",
+    "ioredis": "^5.4.2",
+    "mongoose": "^8.9.6",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.9",
+    "ping": "^0.4.4",
+    "redis": "^4.7.0",
+    "redis-cli": "^2.1.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "chai": "^5.1.2",
+    "chai-http": "^5.1.1",
+    "eslint": "^9.19.0",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^15.14.0",
+    "mocha": "^11.1.0",
+    "sinon": "^19.0.2",
+    "supertest": "^7.0.0"
+  },
+  "description": ""
+}

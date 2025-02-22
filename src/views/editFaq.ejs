@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit FAQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #f4f7fa;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .back-btn:hover {
+            color: #0056b3;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Edit FAQ</h1>
+    <div class="form-container">
+        <form action="/admin/edit/<%= faq._id %>" method="POST">
+            <!-- Question Field -->
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <input type="text" id="question" name="question" value="<%= faq.question %>" required placeholder="Enter the question">
+            </div>
+
+            <!-- Answer Field -->
+            <div class="form-group">
+                <label for="answer">Answer:</label>
+                <textarea id="answer" name="answer" rows="4" required placeholder="Enter the answer"><%= faq.answer %></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                <button type="submit">Update FAQ</button>
+            </div>
+        </form>
+
+        <!-- Back Button -->
+        <a href="/" class="back-btn">Back to FAQ List</a>
+    </div>
+
+    <!-- Bootstrap JS & Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add FAQ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom spinner styling */
+        .spinner-border {
+            display: none;
+        }
+    </style>
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const question = document.querySelector('input[name="question"]').value;
+            const answer = document.querySelector('textarea[name="answer"]').value;
+
+            // Validate if fields are not empty
+            if (!question || !answer) {
+                alert("Please fill in both fields.");
+                return;
+            }
+
+            const data = { question, answer };
+
+            try {
+                // Show loading spinner
+                document.getElementById('loadingSpinner').style.display = 'inline-block';
+
+                const response = await fetch("http://localhost:8000/api/faqs/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    const jsonResponse = await response.json();
+                    console.log("FAQ added successfully:", jsonResponse);
+                    alert("FAQ added successfully");
+
+                    // Redirect back to the admin page after success
+                    window.location.href = "/";
+                } else {
+                    alert("Failed to add FAQ");
+                    console.error("Error:", response.statusText);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("There was an error submitting the form");
+            } finally {
+                // Hide loading spinner after request is completed
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 py-8">
+
+    <div class="max-w-lg mx-auto bg-white p-8 shadow-lg rounded-lg">
+        <h1 class="text-center text-3xl font-semibold text-gray-800 mb-6">Add New FAQ</h1>
+
+        <form id="faqForm" onsubmit="submitForm(event)">
+            <div class="mb-4">
+                <label for="question" class="block text-gray-700 font-medium">Question:</label>
+                <input type="text" name="question" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+            </div>
+
+            <div class="mb-6">
+                <label for="answer" class="block text-gray-700 font-medium">Answer:</label>
+                <textarea name="answer" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" required></textarea>
+            </div>
+
+            <div class="flex justify-center items-center">
+                <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200">
+                    Add FAQ
+                </button>
+                <div id="loadingSpinner" class="spinner-border text-blue-500 ml-3" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </form>
+
+        <a href="/" class="block text-center text-blue-500 font-medium mt-6 hover:underline">
+            Back
+        </a>
+    </div>
+
+</body>
+</html>

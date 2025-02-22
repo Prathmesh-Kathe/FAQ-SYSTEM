@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb+srv://prathmeshkathe:Pass%401234@cluster0.jxotw.mongodb.net/FAQSDB
+      - REDIS_HOST=redis
+    volumes:
+      - .:/app
+    networks:
+      - backend
+
+  redis:
+    image: redis:alpine
+    networks:
+      - backend
+
+  mongodb:
+    image: mongo
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
